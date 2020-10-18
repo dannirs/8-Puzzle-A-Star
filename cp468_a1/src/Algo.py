@@ -8,13 +8,12 @@ import generate_puzzle
 
 
 class algo(object):
-    '''
-    classdocs
-    '''
 
     def __init__(self):
         self.open = []
         self.closed = []
+        self.moves = 0
+        self.deadend = False
     
     def h1(self, currState, goalState):
         
@@ -66,27 +65,38 @@ class algo(object):
                 possibleMoves = [[2, 1], [1, 2]]
         
         print("Children:")
+        countV = 0
         # print each child
         for v in possibleMoves:
-            print(v)
-            # temporary swap of empty space and child
-            tempEmpty = puzzle.empty 
-            tempV = v 
-            tempValue = puzzle.currState[tempV[0]][tempV[1]] 
-            # tempCurr = puzzle.currState 
-            puzzle.currState[tempV[0]][tempV[1]] = 0
-            puzzle.currState[puzzle.empty[0]][puzzle.empty[1]] = tempValue
-            puzzle.empty = v
-            
-            # find heuristic; append to list
-            h1 = self.h1(puzzle.currState, puzzle.goalState)
-            heuristic.append(h1)
-            
-            # swap back
-            puzzle.currState[tempV[0]][tempV[1]] = tempValue
-            puzzle.empty = tempEmpty
-            puzzle.currState[puzzle.empty[0]][puzzle.empty[1]] = 0 
-            
+            if v in self.closed:
+                possibleMoves.remove(v)
+            if v not in self.closed: 
+                countV += 1
+                print(v)
+                # temporary swap of empty space and child
+                tempEmpty = puzzle.empty  # [1,0]
+                tempV = v  # [0,0]
+                tempValue = puzzle.currState[tempV[0]][tempV[1]]  # 3
+                # tempCurr = puzzle.currState 
+                puzzle.currState[tempV[0]][tempV[1]] = 0
+                puzzle.currState[puzzle.empty[0]][puzzle.empty[1]] = tempValue
+                puzzle.empty = v
+                
+                # find heuristic; append to list
+                h1 = self.h1(puzzle.currState, puzzle.goalState)
+                h1 += self.moves
+                heuristic.append(h1)
+                
+                # swap back
+                puzzle.currState[tempV[0]][tempV[1]] = tempValue
+                puzzle.empty = tempEmpty
+                puzzle.currState[puzzle.empty[0]][puzzle.empty[1]] = 0 
+        
+        print(countV)
+        if countV == 0: 
+            self.deadend = True
+            return
+        
         # find the smallest heuristic
         smallest = heuristic[0]
         count = 0
@@ -100,18 +110,20 @@ class algo(object):
         # append child with smallest heuristic to closed list
         self.closed.append(possibleMoves[index])
         
-        tempEmpty = puzzle.empty 
-        tempV = possibleMoves[index] 
-        tempValue = puzzle.currState[tempV[0]][tempV[1]] 
-        puzzle.currState[tempV[0]][tempV[1]] = 0
+        tempEmpty = puzzle.empty  # [1,0]
+        tempV = possibleMoves[index]  # [0,0]
+        tempValue = puzzle.currState[tempV[0]][tempV[1]]  # 3
+        puzzle.currState[tempV[0]][tempV[1]] = 0 
         puzzle.currState[puzzle.empty[0]][puzzle.empty[1]] = tempValue
-        puzzle.empty = v
+        puzzle.empty = possibleMoves[index]
         
         possibleMoves.remove(possibleMoves[index])
         
         # append other children to open list
         for v in possibleMoves:
             self.open.append(v)
+        
+        self.moves += 1
         
         # print closed and open iists
         print("\n")
@@ -130,7 +142,16 @@ class algo(object):
             print(*v)
         
         return
-            
+    
+    def solved(self, puzzle):
+        
+        if puzzle.currState == puzzle.goalState:
+            solved = True
+            # print(solved)
+        else:
+            solved = False
+            # print(solved)
+        return solved
     # open list
     # contains all the nodes that are being generated and don't exist in closed list
     # initially holds the start node
@@ -144,8 +165,7 @@ class algo(object):
     # not being used:
 class node(object):
     
-    def __init__(self, depth, value, heuristic):
-        self.depth = 0
+    def __init__(self, value, heuristic):
         self.parent = None
         self.value = value
         self.heuristic = heuristic
