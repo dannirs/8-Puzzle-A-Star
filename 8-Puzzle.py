@@ -494,3 +494,21 @@ for i in range (0,3):
     initial_node = Node(board.currState,'start')
     Astarh1(initial_node)
     Astarh2(initial_node)
+
+'''
+board = puzzle15()
+
+for i in range (0,3):
+    board.generateRand()
+    initial_node = Node(board.currState,'start')
+    Astarh1(initial_node)
+    Astarh2(initial_node)
+    
+board = puzzle24()
+
+for i in range (0,3):
+    board.generateRand()
+    initial_node = Node(board.currState,'start')
+    Astarh1(initial_node)
+    Astarh2(initial_node)
+'''
