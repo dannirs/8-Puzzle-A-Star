@@ -169,7 +169,246 @@ class puzzle:
                 print(self.currState[i][j],end='\t')
             print()
         return
+    
+class puzzle15:
 
+    def __init__(self): 
+        self.goalState = [[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11], [12, 13, 14, 15]]
+        self.moves = 0
+        self.empty = [0, 0]
+        self.currState = [[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11], [12, 13, 14, 15]]
+        
+    def generateRand(self):
+        
+        self.print()
+        randNum = random.randint(0, 100)
+        for i in range(randNum):
+            self.slide()
+            self.print()
+        
+        return
+    
+    def slide(self):
+
+        numStates = 0
+        if self.empty[0] == 0:
+            numStates += 1
+            if self.empty[1] == 0:
+                numStates += 1
+                possibleMoves = [[0, 1], [1, 0]]
+            elif self.empty[1] == 1:
+                numStates += 2
+                possibleMoves = [[0, 0], [0, 2], [1, 1]]
+            elif self.empty[1] == 2:
+                numStates += 2
+                possibleMoves = [[0, 1], [0, 3], [1, 2]]
+            elif self.empty[1] == 3:
+                numStates += 1
+                possibleMoves = [[0, 2], [1, 3]]
+        elif self.empty[0] == 1:
+            numStates += 2
+            if self.empty[1] == 0:
+                numStates += 1
+                possibleMoves = [[0, 0], [1, 1], [2, 0]]
+            elif self.empty[1] == 1:
+                numStates += 2
+                possibleMoves = [[0, 1], [1, 0], [1, 2], [2, 1]]
+            elif self.empty[1] == 2:
+                numStates += 2
+                possibleMoves = [[0, 2], [1, 1], [1, 3], [2, 2]]
+            elif self.empty[1] == 3:
+                numStates += 1
+                possibleMoves = [[0, 3], [1, 2], [2, 3]]
+        elif self.empty[0] == 2:
+            numStates += 2
+            if self.empty[1] == 0:
+                numStates += 1
+                possibleMoves = [[1, 0], [2, 1], [3, 0]]
+            elif self.empty[1] == 1:
+                numStates += 2
+                possibleMoves = [[1, 1], [2, 0], [2, 2], [3, 1]]
+            elif self.empty[1] == 2:
+                numStates += 2
+                possibleMoves = [[1, 2], [2, 1], [2, 3], [3, 2]]
+            elif self.empty[1] == 3:
+                numStates += 1
+                possibleMoves = [[1, 3], [2, 2], [3, 3]]
+        elif self.empty[0] == 3:
+            numStates += 1
+            if self.empty[1] == 0:
+                numStates += 1
+                possibleMoves = [[2, 0], [3, 1]]
+            elif self.empty[1] == 1:
+                numStates += 2
+                possibleMoves = [[2, 1], [3, 0], [3, 2]]
+            elif self.empty[1] == 2:
+                numStates += 1
+                possibleMoves = [[2, 2], [3, 1], [3, 3]]
+            elif self.empty[1] == 3:
+                numStates += 1
+                possibleMoves = [[2, 3], [3, 2]]
+        
+        randNum = random.randint(0, numStates - 1)
+        temp = possibleMoves[randNum]
+        value = self.currState[temp[0]][temp[1]]
+        temp2 = self.empty
+        self.currState[temp2[0]][temp2[1]] = value
+        self.currState[temp[0]][temp[1]] = 0 
+        self.empty = possibleMoves[randNum]
+
+        return
+    
+    def print(self):
+        
+        '''
+        for i in range(len(self.currState)):
+            for j in range(len(self.currState[i])):
+                print(self.currState[i][j])
+                # if self.currState[i][j] < 10:
+                #    print(" ")
+        '''
+
+        mx = len(max((str(sub[0]) for sub in self.currState), key=len))
+
+        for row in self.currState:
+            print("  ".join(["{:<{mx}}".format(ele, mx=mx) for ele in row]))
+        print("\n")
+
+
+class puzzle24:
+
+    def __init__(self): 
+        self.goalState = [[0, 1, 2, 3, 4], [5, 6, 7, 8, 9], [10, 11, 12, 13, 14], [15, 16, 17, 18, 19], [20, 21, 22, 23, 24]]
+        self.moves = 0
+        self.empty = [0, 0]
+        self.currState = [[0, 1, 2, 3, 4], [5, 6, 7, 8, 9], [10, 11, 12, 13, 14], [15, 16, 17, 18, 19], [20, 21, 22, 23, 24]]
+        
+    def generateRand(self):
+        
+        self.print()
+        randNum = random.randint(0, 100)
+        for i in range(randNum):
+            self.slide()
+            self.print()
+        
+        return
+    
+    def slide(self):
+
+        numStates = 0
+        if self.empty[0] == 0:
+            numStates += 1
+            if self.empty[1] == 0:
+                numStates += 1
+                possibleMoves = [[0, 1], [1, 0]]
+            elif self.empty[1] == 1:
+                numStates += 2
+                possibleMoves = [[0, 0], [0, 2], [1, 1]]
+            elif self.empty[1] == 2:
+                numStates += 2
+                possibleMoves = [[0, 1], [0, 3], [1, 2]]
+            elif self.empty[1] == 3:
+                numStates += 2
+                possibleMoves = [[0, 2], [0, 4], [1, 3]]
+            elif self.empty[1] == 4:
+                numStates += 1
+                possibleMoves = [[0, 3], [1, 4]]
+        elif self.empty[0] == 1:
+            numStates += 2
+            if self.empty[1] == 0:
+                numStates += 1
+                possibleMoves = [[0, 0], [1, 1], [2, 0]]
+            elif self.empty[1] == 1:
+                numStates += 2
+                possibleMoves = [[0, 1], [1, 0], [1, 2], [2, 1]]
+            elif self.empty[1] == 2:
+                numStates += 2
+                possibleMoves = [[0, 2], [1, 1], [1, 3], [2, 2]]
+            elif self.empty[1] == 3:
+                numStates += 2
+                possibleMoves = [[0, 3], [1, 2], [1, 4], [2, 3]]
+            elif self.empty[1] == 4:
+                numStates += 1
+                possibleMoves = [[0, 4], [1, 3], [2, 4]]
+        elif self.empty[0] == 2:
+            numStates += 2
+            if self.empty[1] == 0:
+                numStates += 1
+                possibleMoves = [[1, 0], [2, 1], [3, 0]]
+            elif self.empty[1] == 1:
+                numStates += 2
+                possibleMoves = [[1, 1], [2, 0], [2, 2], [3, 1]]
+            elif self.empty[1] == 2:
+                numStates += 2
+                possibleMoves = [[1, 2], [2, 1], [2, 3], [3, 2]]
+            elif self.empty[1] == 3:
+                numStates += 2
+                possibleMoves = [[1, 3], [2, 2], [2, 4], [3, 3]]
+            elif self.empty[1] == 4:
+                numStates += 1
+                possibleMoves = [[1, 4], [2, 3], [3, 4]]
+        elif self.empty[0] == 3:
+            numStates += 2
+            if self.empty[1] == 0:
+                numStates += 1
+                possibleMoves = [[2, 0], [3, 1], [4, 0]]
+            elif self.empty[1] == 1:
+                numStates += 2
+                possibleMoves = [[2, 1], [3, 0], [3, 2], [4, 1]]
+            elif self.empty[1] == 2:
+                numStates += 2
+                possibleMoves = [[2, 2], [3, 1], [3, 3], [4, 2]]
+            elif self.empty[1] == 3:
+                numStates += 2
+                possibleMoves = [[2, 3], [3, 2], [3, 4], [4, 3]]
+            elif self.empty[1] == 4:
+                numStates += 1
+                possibleMoves = [[2, 4], [3, 3], [4, 4]]
+        elif self.empty[0] == 4:
+            numStates += 1
+            if self.empty[1] == 0:
+                numStates += 1
+                possibleMoves = [[3, 0], [4, 1]]
+            elif self.empty[1] == 1:
+                numStates += 2
+                possibleMoves = [[3, 1], [4, 0], [4, 2]]
+            elif self.empty[1] == 2:
+                numStates += 1
+                possibleMoves = [[3, 2], [4, 1], [4, 3]]
+            elif self.empty[1] == 3:
+                numStates += 1
+                possibleMoves = [[3, 3], [4, 2], [4, 4]]
+            elif self.empty[1] == 4:
+                numStates += 1
+                possibleMoves = [[3, 4], [4, 3]]
+        
+        randNum = random.randint(0, numStates - 1)
+        temp = possibleMoves[randNum]
+        value = self.currState[temp[0]][temp[1]]
+        temp2 = self.empty
+        self.currState[temp2[0]][temp2[1]] = value
+        self.currState[temp[0]][temp[1]] = 0 
+        self.empty = possibleMoves[randNum]
+
+        return
+    
+    def print(self):
+        
+        '''
+        for i in range(len(self.currState)):
+            for j in range(len(self.currState[i])):
+                print(self.currState[i][j])
+                # if self.currState[i][j] < 10:
+                #    print(" ")
+        '''
+
+        mx = len(max((str(sub[0]) for sub in self.currState), key=len))
+
+        for row in self.currState:
+            print("  ".join(["{:<{mx}}".format(ele, mx=mx) for ele in row]))
+        print("\n")
+        
+    
 """Actual A star (h1) fucntion."""    
 def Astarh1(start_node):
     PQueue = pq() 
