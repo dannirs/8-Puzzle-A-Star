@@ -12,5 +12,7 @@ if __name__ == '__main__':
  
 puzzleInstance = puzzle()
 puzzleInstance.generateRand()
-h1 = algo.h1(puzzleInstance.currState, puzzleInstance.currState, puzzleInstance.goalState)
+algoInstance = algo()
+# h1 = algo.h1(algoInstance, puzzleInstance.currState, puzzleInstance.goalState)
+algo.nextMove(algoInstance, puzzleInstance)
 
