@@ -38,6 +38,19 @@ class Node(object):
                 t += abs(i-r)+abs(j-c)
         return t
     
+    def calcmisplaced_tiles(self):
+        
+        value = 0
+        n = 0
+        for i in range (len(self.b)):
+            for j in range (len(self.b[i])):
+                if self.b[i][j] != n:
+                    value += 1
+                    n += 1
+                elif self.b[i][j] == n:
+                    n += 1
+        return value
+    
     """The function generates and returns nodes."""
     def create_nodes(self):
         empty_position = self.empty_position()
@@ -156,12 +169,38 @@ class puzzle:
                 print(self.currState[i][j],end='\t')
             print()
         return
-        
 
+"""Actual A star (h1) fucntion."""    
+def Astarh1(start_node):
+    PQueue = pq() 
+    visited = []
+    explored = 0
+    draw_board(start_node.b)
+    print()
+    PQueue.put((start_node.calcmisplaced_tiles(),start_node)) 
+    while not PQueue.empty():  
+        h, n = PQueue.get() 
+        if n.b in visited:   
+            continue
+        if h==0: 
+            print('Testing h1...')
+            print('Congratulations!')
+            print('The number of explored nodes:%d'%explored)
+            print('The number of steps taken:',(len(n.node_traceback()))-1)
+            print('-------------------------------')
+            #draw_path(n.node_traceback())
+            #draw_board(start_node.b)
+            return
+       
+        visited.append(n.b)
+       
+        explored+=1
+       
+        for nnode in n.create_nodes(): 
+            PQueue.put((nnode.calcmisplaced_tiles(),nnode))
 
-"""Actual A star fucntion."""    
-
-def Astar_algo(start_node):
+"""Actual A star (h2) fucntion."""    
+def Astarh2(start_node):
     PQueue = pq() 
     visited = []
     explored = 0
@@ -171,10 +210,13 @@ def Astar_algo(start_node):
         if n.b in visited:   
             continue
         if h==0: 
+            print('Testing h2...')
             print('Congratulations!')
             print('The number of explored nodes:%d'%explored)
-            print('The number of steps taken:',len(n.node_traceback()))
-            draw_path(n.node_traceback())
+            print('The number of steps taken:',(len(n.node_traceback())) - 1)
+            print()
+            #draw_path(n.node_traceback())
+            #draw_board(start_node.b)
             return
        
         visited.append(n.b)
@@ -183,8 +225,8 @@ def Astar_algo(start_node):
        
         for nnode in n.create_nodes(): 
             PQueue.put((nnode.calcmanhattan_distance(),nnode))
-
-           
+            
+            
 """Prints the board."""         
 def draw_board(board):
     print('___________')
@@ -211,4 +253,5 @@ board = puzzle()
 for i in range (0,3):
     board.generateRand()
     initial_node = Node(board.currState,'start')
-    Astar_algo(initial_node)
+    Astarh1(initial_node)
+    Astarh2(initial_node)
