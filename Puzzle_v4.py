@@ -1,6 +1,6 @@
 '''
 Created 2020 M10 14
-Author: Group IDs?
+Author: Danni Shang - 150675520
 '''
 
 from copy import deepcopy
@@ -525,7 +525,7 @@ def h3Algo(start_node):
         if n.puzzle in visited:   
             continue
         if goalState == n.puzzle:  
-            print('Euclidean Distance Heurisitic:')
+            print('Euclidean Distance Heuristic:')
             print('Expanded nodes:', expanded)
             steps = (len(n.path())) - 1
             print('Moves:', (len(n.path())) - 1)
@@ -569,10 +569,12 @@ for i in range (0, iterations):
     h2Algo(initial_node)
     h3Algo(initial_node)
     
+print()
+print("Table")
+print("----------------------------------------")
+print("Puzzle | H1 Expanded Nodes | H1 Moves | H2 Expanded Nodes | H2 Moves | H3 Expanded Nodes | H3 Moves")
 for i in range(0, iterations):
-    print(heuristic1[i])
-    print(heuristic2[i])
-    print(heuristic3[i])
+    print(heuristic1[i][0], heuristic1[i][1], heuristic1[i][2], heuristic2[i][1], heuristic2[i][2], heuristic3[i][1], heuristic3[i][2])
 
 '''
 '''
@@ -586,10 +588,12 @@ for i in range (0, iterations):
     h2Algo(initial_node)
     h3Algo(initial_node)
 
+print()
+print("Table")
+print("----------------------------------------")
+print("Puzzle | H1 Expanded Nodes | H1 Moves | H2 Expanded Nodes | H2 Moves | H3 Expanded Nodes | H3 Moves")
 for i in range(0, iterations):
-    print(heuristic1[i])
-    print(heuristic2[i])
-    print(heuristic3[i])
+    print(heuristic1[i][0], heuristic1[i][1], heuristic1[i][2], heuristic2[i][1], heuristic2[i][2], heuristic3[i][1], heuristic3[i][2])
 '''
 '''
 size = 5
@@ -602,10 +606,12 @@ for i in range (0, iterations):
     h2Algo(initial_node)
     h3Algo(initial_node)
     
+print()
+print("Table")
+print("----------------------------------------")
+print("Puzzle | H1 Expanded Nodes | H1 Moves | H2 Expanded Nodes | H2 Moves | H3 Expanded Nodes | H3 Moves")
 for i in range(0, iterations):
-    print(heuristic1[i])
-    print(heuristic2[i])
-    print(heuristic3[i])
+    print(heuristic1[i][0], heuristic1[i][1], heuristic1[i][2], heuristic2[i][1], heuristic2[i][2], heuristic3[i][1], heuristic3[i][2])
 
 
 '''
