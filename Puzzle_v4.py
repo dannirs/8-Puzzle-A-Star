@@ -203,7 +203,7 @@ class puzzle24:
     def generateRand(self):
         
         # self.print()
-        randNum = random.randint(0, 100)
+        randNum = random.randint(0, 50)
         for i in range(randNum):
             self.slide()
         # self.print()
@@ -579,7 +579,7 @@ for i in range(0, iterations):
     print(heuristic1[i][0], heuristic1[i][1], heuristic1[i][2], heuristic2[i][1], heuristic2[i][2], heuristic3[i][1], heuristic3[i][2])
 
 print()
-print("16 Puzzle")
+print("15 Puzzle")
 size = 4
 iterations = 5
 for i in range (0, iterations):
