@@ -560,54 +560,59 @@ def display(puzzle):
 '''
 '''
 
-def table():
-    print()
-    print("Table")
-    print("----------------------------------------")
-    print("Puzzle | H1 Expanded Nodes | H1 Moves | H2 Expanded Nodes | H2 Moves | H3 Expanded Nodes | H3 Moves")
-    for i in range(0, iterations):
-        print(heuristic1[i][0], heuristic1[i][1], heuristic1[i][2], heuristic2[i][1], heuristic2[i][2], heuristic3[i][1], heuristic3[i][2]) 
+print("8 Puzzle")
+size = 3
+iterations = 5
+for i in range (0, iterations):
+    board = puzzle8()
+    board.generateRand()
+    initial_node = Node(board.currState, 'start')
+    h1Algo(initial_node)
+    h2Algo(initial_node)
+    h3Algo(initial_node)
+    
+print()
+print("Table")
+print("----------------------------------------")
+print("Puzzle | H1 Expanded Nodes | H1 Moves | H2 Expanded Nodes | H2 Moves | H3 Expanded Nodes | H3 Moves")
+for i in range(0, iterations):
+    print(heuristic1[i][0], heuristic1[i][1], heuristic1[i][2], heuristic2[i][1], heuristic2[i][2], heuristic3[i][1], heuristic3[i][2])
 
+print()
+print("16 Puzzle")
+size = 4
+iterations = 5
+for i in range (0, iterations):
+    board = puzzle15()
+    board.generateRand()
+    initial_node = Node(board.currState, 'start')
+    h1Algo(initial_node)
+    h2Algo(initial_node)
+    h3Algo(initial_node)
+    
+print()
+print("Table")
+print("----------------------------------------")
+print("Puzzle | H1 Expanded Nodes | H1 Moves | H2 Expanded Nodes | H2 Moves | H3 Expanded Nodes | H3 Moves")
+for i in range(0, iterations):
+    print(heuristic1[i][0], heuristic1[i][1], heuristic1[i][2], heuristic2[i][1], heuristic2[i][2], heuristic3[i][1], heuristic3[i][2])
 
-while (size != 8 and size != 16 and size != 25): 
-    print()
-    size = int(input("Enter puzzle size (8, 16, or 25): "))
-    if size == 8:
-        print("8 Puzzle")
-        size = 3
-        iterations = 10
-        for i in range (0, iterations):
-            board = puzzle8()
-            board.generateRand()
-            initial_node = Node(board.currState, 'start')
-            h1Algo(initial_node)
-            h2Algo(initial_node)
-            h3Algo(initial_node)
-        table()
-    elif size == 16:
-        print("16 puzzle")
-        size = 4
-        iterations = 10
-        for i in range (0, iterations):
-            board = puzzle15()
-            board.generateRand()
-            initial_node = Node(board.currState, 'start')
-            h1Algo(initial_node)
-            h2Algo(initial_node)
-            h3Algo(initial_node)
-        table()
-    elif size == 25:
-        print("25 puzzle")
-        size = 5
-        iterations = 10
-        for i in range (0, iterations):
-            board = puzzle24()
-            board.generateRand()
-            initial_node = Node(board.currState, 'start')
-            h1Algo(initial_node)
-            h2Algo(initial_node)
-            h3Algo(initial_node)
-        table()
-    else: 
-        size = int(input("Error; please enter puzzle size (8, 16, or 25): "))
+print()
+print("24 Puzzle")
+size = 5
+iterations = 5
+for i in range (0, iterations):
+    board = puzzle24()
+    board.generateRand()
+    initial_node = Node(board.currState, 'start')
+    h1Algo(initial_node)
+    h2Algo(initial_node)
+    h3Algo(initial_node)
+    
+print()
+print("Table")
+print("----------------------------------------")
+print("Puzzle | H1 Expanded Nodes | H1 Moves | H2 Expanded Nodes | H2 Moves | H3 Expanded Nodes | H3 Moves")
+for i in range(0, iterations):
+    print(heuristic1[i][0], heuristic1[i][1], heuristic1[i][2], heuristic2[i][1], heuristic2[i][2], heuristic3[i][1], heuristic3[i][2])  
     
