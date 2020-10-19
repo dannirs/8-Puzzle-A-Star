@@ -1,6 +1,6 @@
 '''
-Created 2020 M10 14
-Author: Group IDs?
+Created 2020 10/14
+Author: Danni Shang - 150675520
 '''
 
 from copy import deepcopy
@@ -434,7 +434,6 @@ def h1Algo(start_node):
     visited = []
     expanded = 0
     display(start_node.puzzle)
-    print()
     PQueue.put((start_node.fn1(), start_node)) 
     # print(start_node.fn1())
     if size == 3:
@@ -562,10 +561,10 @@ for i in range (0, iterations):
     h2Algo(initial_node)
     h3Algo(initial_node)
     
+print("Table")
+print("----------------------------------------")
 for i in range(0, iterations):
-    print(heuristic1[i])
-    print(heuristic2[i])
-    print(heuristic3[i])
+    print(heuristic1[i][0], heuristic1[i][1], heuristic1[i][2], heuristic2[i][1], heuristic2[i][2], heuristic3[i][1], heuristic3[i][2])
 
 '''
 '''
@@ -579,10 +578,11 @@ for i in range (0, iterations):
     h2Algo(initial_node)
     h3Algo(initial_node)
 
+print("Table")
+print("----------------------------------------")
 for i in range(0, iterations):
-    print(heuristic1[i])
-    print(heuristic2[i])
-    print(heuristic3[i])
+    print(heuristic1[i][0], heuristic1[i][1], heuristic1[i][2], heuristic2[i][1], heuristic2[i][2], heuristic3[i][1], heuristic3[i][2])
+
 '''
 '''
 size = 5
@@ -595,10 +595,10 @@ for i in range (0, iterations):
     h2Algo(initial_node)
     h3Algo(initial_node)
     
+print("Table")
+print("----------------------------------------")
 for i in range(0, iterations):
-    print(heuristic1[i])
-    print(heuristic2[i])
-    print(heuristic3[i])
+    print(heuristic1[i][0], heuristic1[i][1], heuristic1[i][2], heuristic2[i][1], heuristic2[i][2], heuristic3[i][1], heuristic3[i][2])
 
 
 '''
