@@ -6,6 +6,7 @@ Author: Group IDs?
 from copy import deepcopy
 from queue import PriorityQueue
 import random
+from math import sqrt
 
 size = 3
 
@@ -361,7 +362,16 @@ class Node(object):
                 c = int(self.puzzle[i][j] % size)
                 t += abs(i - r) + abs(j - c)
         return t
-
+    
+    def euclideanDist(self):
+        t = 0
+        for i in range(size):
+            for j in range(size):
+                r = int(self.puzzle[i][j] / size)
+                c = int(self.puzzle[i][j] % size)
+                t += sqrt(((i - r) * (i - r)) + ((j - c) * (j - c)))
+        return t
+    
     def getChildren(self):
         emptySpace = self.empty()
         puzzle = self.puzzle 
@@ -455,8 +465,33 @@ def h2Algo(start_node):
         explored += 1
        
         for nnode in n.getChildren(): 
-            PQueue.put((nnode.manhattanDist(), nnode))     
-
+            PQueue.put((nnode.manhattanDist(), nnode))
+    
+    
+def h3Algo(start_node):
+    PQueue = PriorityQueue() 
+    visited = []
+    explored = 0
+    PQueue.put((start_node.euclideanDist(), start_node)) 
+    while not PQueue.empty():  
+        h, n = PQueue.get() 
+        if n.puzzle in visited:   
+            continue
+        if h == 0: 
+            print('Testing h3...')
+            print('The number of explored nodes:%d' % explored)
+            print('The number of steps taken:', (len(n.path())) - 1)
+            print()
+            #draw_path(n.path())
+            #display(start_node.b)
+            return
+       
+        visited.append(n.puzzle)
+       
+        explored += 1
+       
+        for nnode in n.getChildren(): 
+            PQueue.put((nnode.euclideanDist(), nnode))
 
 def display(puzzle):
         
@@ -470,7 +505,7 @@ def display(puzzle):
 ---------------         Testing      --------------------
 ---------------------------------------------------------
 '''
-'''
+
 board = puzzle8()
 size = 3
 
@@ -479,6 +514,7 @@ for i in range (0, 100):
     initial_node = Node(board.currState, 'start')
     h1Algo(initial_node)
     h2Algo(initial_node)
+    h3Algo(initial_node)
 '''
 '''
 board = puzzle15()
@@ -488,6 +524,7 @@ for i in range (0, 100):
     initial_node = Node(board.currState, 'start')
     h1Algo(initial_node)
     h2Algo(initial_node)
+    h3Algo(initial_node)
 '''
 
 '''
@@ -498,11 +535,12 @@ for i in range (0, 10):
     initial_node = Node(board.currState, 'start')
     h1Algo(initial_node)
     h2Algo(initial_node)
+    h3Algo(initial_node)
 
 '''
 '''
-size = 4
-initial_node = Node([[4, 1, 3, 9], [8, 6, 2, 7], [12, 5, 11, 15], [13, 14, 10, 0]], 'start')
+size = 3
+initial_node = Node([[1, 0, 2], [3, 6, 5], [7, 4, 8]], 'start')
 h1Algo(initial_node)
 h2Algo(initial_node)
-'''
+h3Algo(initial_node)
