@@ -1,6 +1,6 @@
 '''
-Created 2020 10/14
-Author: Danni Shang - 150675520
+Created 2020 M10 14
+Author: Group IDs?
 '''
 
 from copy import deepcopy
@@ -342,6 +342,9 @@ class Node(object):
     
     def fn2(self):
         return self.manhattanDist() + self.height
+    
+    def fn3(self):
+        return self.euclideanDist() + self.height
 
     def __lt__(self, other): 
         return 0
@@ -434,6 +437,7 @@ def h1Algo(start_node):
     visited = []
     expanded = 0
     display(start_node.puzzle)
+    print()
     PQueue.put((start_node.fn1(), start_node)) 
     # print(start_node.fn1())
     if size == 3:
@@ -509,15 +513,19 @@ def h3Algo(start_node):
     PQueue = PriorityQueue() 
     visited = []
     expanded = 0
-    display(start_node.puzzle)
-    PQueue.put((start_node.euclideanDist(), start_node)) 
-    # print(start_node.fn1())
+    PQueue.put((start_node.fn3(), start_node)) 
+    if size == 3:
+        goalState = [[0, 1, 2], [3, 4, 5], [6, 7, 8]]
+    elif size == 4: 
+        goalState = [[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11], [12, 13, 14, 15]]
+    elif size == 5: 
+        goalState = [[0, 1, 2, 3, 4], [5, 6, 7, 8, 9], [10, 11, 12, 13, 14], [15, 16, 17, 18, 19], [20, 21, 22, 23, 24]]
     while not PQueue.empty():  
-        h, n = PQueue.get() 
+        fn, n = PQueue.get() 
         if n.puzzle in visited:   
             continue
-        if h == 0: 
-            print('Euclidean Distance Heuristic: ')
+        if goalState == n.puzzle:  
+            print('Euclidean Distance Heurisitic:')
             print('Expanded nodes:', expanded)
             steps = (len(n.path())) - 1
             print('Moves:', (len(n.path())) - 1)
@@ -535,7 +543,7 @@ def h3Algo(start_node):
         expanded += 1
        
         for nnode in n.getChildren(): 
-            PQueue.put((nnode.euclideanDist(), nnode))
+            PQueue.put((nnode.fn3(), nnode))   
 
 
 def display(puzzle):
@@ -561,10 +569,10 @@ for i in range (0, iterations):
     h2Algo(initial_node)
     h3Algo(initial_node)
     
-print("Table")
-print("----------------------------------------")
 for i in range(0, iterations):
-    print(heuristic1[i][0], heuristic1[i][1], heuristic1[i][2], heuristic2[i][1], heuristic2[i][2], heuristic3[i][1], heuristic3[i][2])
+    print(heuristic1[i])
+    print(heuristic2[i])
+    print(heuristic3[i])
 
 '''
 '''
@@ -578,11 +586,10 @@ for i in range (0, iterations):
     h2Algo(initial_node)
     h3Algo(initial_node)
 
-print("Table")
-print("----------------------------------------")
 for i in range(0, iterations):
-    print(heuristic1[i][0], heuristic1[i][1], heuristic1[i][2], heuristic2[i][1], heuristic2[i][2], heuristic3[i][1], heuristic3[i][2])
-
+    print(heuristic1[i])
+    print(heuristic2[i])
+    print(heuristic3[i])
 '''
 '''
 size = 5
@@ -595,10 +602,10 @@ for i in range (0, iterations):
     h2Algo(initial_node)
     h3Algo(initial_node)
     
-print("Table")
-print("----------------------------------------")
 for i in range(0, iterations):
-    print(heuristic1[i][0], heuristic1[i][1], heuristic1[i][2], heuristic2[i][1], heuristic2[i][2], heuristic3[i][1], heuristic3[i][2])
+    print(heuristic1[i])
+    print(heuristic2[i])
+    print(heuristic3[i])
 
 
 '''
